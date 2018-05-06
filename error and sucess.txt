@@ -1,0 +1,55 @@
+
+
+Define the error in your controller:
+
+ModelState.AddModelError("Error", "Check ID");
+
+
+//View Page
+
+@if (!ViewData.ModelState.IsValid && ViewData.ModelState["Error"].Errors.Count > 0)
+{
+    <div class="alert alert-danger">
+       <strong>Error!</strong>@ViewData.ModelState["Error"].Errors.First().ErrorMessage
+    </div>
+}
+
+
+//Or You can write this in view page
+<head>
+    <script type="text/javascript">
+        @if (!ViewData.ModelState.IsValid && ViewData.ModelState["Error"].Errors.Count > 0)
+        {
+            <text>
+            $(document).ready(function() {
+                alert('@ViewData.ModelState["Error"].Errors.First().ErrorMessage');
+            });
+            </text>
+        }
+    </script>
+</head>
+
+
+
+//for sucess
+//defined in controller
+ TempData["Success"] = "your message has been send successfully.";
+
+//view page
+ @if (TempData["Success"] != null)
+                  {
+                <div class="alert alert-success alert-dismissible" role="alert">
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <strong>Thank You !!</strong><small> @TempData["Success"]</small>
+                </div>
+                  }
+
+
+
+
+
+
+
+
+
+
